@@ -54,12 +54,10 @@ def confidence_score(num_only_array, data_array):
         confidence_score_list = []
         num_of_picks = len(win_loss_list)
         for i in range(len(win_loss_list)):
-            i = i + 1
-            weekly_score = i / num_of_picks * win_loss_list[i - 1] #the win/loss get weighted by how many picks came before
+            weekly_score = i / num_of_picks * win_loss_list[i] #the win/loss get weighted by how many picks came before
             confidence_score_list.append(weekly_score)
         confidence_score = sum(confidence_score_list) #list gets summed to ge the final confidence score
         confidence_list.append(confidence_score)
-        confidence_score_list.clear()
         win_loss_list.clear()
     return(confidence_list)
 
@@ -140,11 +138,11 @@ def make_plot(data_array, num_only_array, chosen_analysis):
                'Loss':"red"}
     sns.barplot( x = "team_week", y = "confidence_score", data = df, hue = "bills_win_or_loss", palette = palette)
     plt.xticks(rotation = 90, fontsize = 10)
-    plt.xlabel("Week/Opponent", fontsize = 20)
-    plt.ylabel("Confidence Interval", fontsize = 20)
-    
-    
+    plt.xlabel("Week/Opponent", fontsize = 10)
+    plt.ylabel("Confidence Interval", fontsize = 10)
     plt.legend(title = "Bill's Win or Loss")
+    plt.tight_layout()
+    plt.show()
 
 ####################################################################################################
 
